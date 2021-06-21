@@ -1,0 +1,5 @@
+name: ${project.name}
+main: ru.mrflaxe.betterfirearrows.Main
+author: Mrflaxe
+api-version: 1.16 
+version: ${project.version}
