@@ -9,7 +9,6 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.type.Fire;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Creeper;
@@ -17,11 +16,8 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
-import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerPickupArrowEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Listener implements org.bukkit.event.Listener{
@@ -36,20 +32,11 @@ public class Listener implements org.bukkit.event.Listener{
     }
     
     @EventHandler
-    public void onBowShoot(EntityShootBowEvent e) {
-        ItemStack bow = e.getBow();
-        
-        if(bow.containsEnchantment(Enchantment.ARROW_FIRE))
-            e.getProjectile().setMetadata("inflammatory", new FixedMetadataValue(plugin, true));
-    }
-    
-    @EventHandler
     public void onArrowHit(ProjectileHitEvent e) {
         if(e.getEntityType() != EntityType.ARROW) return;
         Arrow arrow = (Arrow) e.getEntity();
         
-        if(!arrow.hasMetadata("inflammatory")) return;
-        
+        if(arrow.getFireTicks() == 0) return;
         
         if(e.getHitEntity() != null && e.getHitEntity().getType() == EntityType.CREEPER) {
             Creeper creeper = (Creeper) e.getHitEntity();
@@ -72,11 +59,9 @@ public class Listener implements org.bukkit.event.Listener{
         
         int arrowId = arrow.getEntityId();
         activeArrows.add(arrowId);
-        System.out.println("ƒобавл€ем стрелу в список");
         
         Bukkit.getScheduler().runTaskLater(plugin, () -> {
             if(!activeArrows.contains(arrowId)) {
-                System.out.println("Id стрелы не найден в спике - return");
                 return;
             }
             
