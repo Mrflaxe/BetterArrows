@@ -9,4 +9,7 @@ So what it adds:
 <br>
 Also if a creeper just taking fire damage he can suddenly explode with 10% chance per each damage take.
 
+# Works on 1.16+
+
 ### In future will be more!
+
