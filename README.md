@@ -1,7 +1,7 @@
 # BetterArrows
 This plugin for Minecraft makes fire arrows really fire and adds some other features
 
-So what it adds:
+So what this adds:
 * If a fire arrow hits burnable block (like leaves, wood, planks etc.) it can put it on fire with 50% chace.
 * If a fire arrow hits creeper he will instantly explode :)
 * If an arrow hits primed TNT it will instantly explode.
