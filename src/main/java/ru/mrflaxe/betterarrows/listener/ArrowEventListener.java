@@ -38,7 +38,7 @@ public class ArrowEventListener implements org.bukkit.event.Listener{
         
         Arrow arrow = (Arrow) event.getEntity();
         
-        if(arrow.getFireTicks() != 0) {
+        if(arrow.getFireTicks() > 0) {
             handleFireArrowHit(event);
         }
         
